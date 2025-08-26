@@ -7,25 +7,63 @@ write end points in nodejs
 
 ## Usage
 
-- Array (FrontEndBackEnd)
 
-1. Open an Empty Folder.
-2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
-3. Search for and run (`Generate FrontAndBack`).
-4. Find the available options there ( like `Generate`).
-5. All the Folders and Files are copied to your empty Folder.
-6. .env file the place where you define ( Data Path and Port Number ).
-7. app.js is entry file.
+
+### FrontEndBackEnd
+
+| Step | Instruction |
+|------|-------------|
+| 1    | Open an Empty Folder. |
+| 2    | Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`). |
+| 3    | Search for and run (`Generate FrontEndBackEnd`). |
+| 4    | All the Folders and Files are copied to your empty Folder. |
+| 5    | Define Data Path and Port Number in `.env` file. |
+| 6    | The entry file is `app.js`. |
 
 - Array (OnlyBackEnd)
 
 1. Open an Empty Folder.
 2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
-3. Search for and run (`Generate OnlyBackEnd`).
-4. Find the available options there ( like `Generate`).
+3. Search for and run (` OnlyBackEnd`).
+4. Find the available options there ( like ``).
 5. All the Folders and Files are copied to your empty Folder.
 6. .env file the place where you define ( Data Path and Port Number ).
 7. app.js is entry file.
+
+## Module Commands
+
+
+### Async FrontEndBackEndWithGulp
+
+1. Open an Empty Folder.
+2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
+3. Search for and run (`Async FrontEndBackEndWithGulp`).
+4. All the Folders and Files are copied to your empty Folder.
+5. Define Data Path and Port Number in `.env` file.
+6. The entry file is `app.js`.
+
+### Generate
+
+1. Open an Empty Folder.
+2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
+3. Search for and run one of the following commands:
+	- `Generate FrontEndBackEnd`
+	- `Generate OnlyBackEnd`
+	- `Generate OnlyFrontEnd`
+	- `Generate FrontEndBackEndWithGulp`
+	- `Generate WithSubTable`
+4. All the Folders and Files are copied to your empty Folder.
+5. Define Data Path and Port Number in `.env` file.
+6. The entry file is `app.js`.
+
+### MongoDB FrontEndBackEndWithGulp
+
+1. Open an Empty Folder.
+2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
+3. Search for and run (`MongoDB FrontEndBackEndWithGulp`).
+4. All the Folders and Files are copied to your empty Folder.
+5. Define Data Path and Port Number in `.env` file.
+6. The entry file is `app.js`.
 
 
 ## project-root/ 
@@ -64,7 +102,7 @@ write end points in nodejs
 
 ### 0.1.2
 
-- Generate.FrontAndBack working good.
+- .FrontAndBack working good.
 
 ### 0.2.3
 

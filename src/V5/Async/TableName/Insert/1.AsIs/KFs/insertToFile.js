@@ -1,49 +1,40 @@
-import fs from "fs";
 
-import ParamsJson from '../../../CommonFuncs/params.json' with {type: 'json'};
+import { configDotenv } from "dotenv";
+import { MongoClient } from "mongodb";
+configDotenv();
+
+const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/";
+const db_name = process.env.MONGODB_DB || "demo";
+const collection_name = process.env.MONGODB_COLLECTION || "users";
+
 
 const StartFunc = async ({ inRequestBody }) => {
-  const LocalFileName = ParamsJson.TableName;
-  const LocalDataPath = ParamsJson.DataPath;
-
-  let LocalinDataToInsert = inRequestBody;
-
-  const filePath = `${LocalDataPath}/${LocalFileName}.json`;
-  let LocalReturnObject = {};
-  LocalReturnObject.KTF = false;
+  let LocalReturnObject = { KTF: false };
+  const client = new MongoClient(uri);
 
   try {
-    if (fs.existsSync(filePath)) {
-      const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-      let LocalArrayPk = data.map(element => element.pk);
+    await client.connect();
+    const db = client.db(db_name);
+    const collection = db.collection(collection_name);
 
-      let LocalRemoveUndefined = LocalArrayPk.filter(function (element) {
-        return element !== undefined;
-      });
+    // Optionally, you can add a pk field if needed, similar to file logic
+    // For now, just insert the incoming data
+    const result = await collection.insertOne(inRequestBody);
 
-      let numberArray = LocalRemoveUndefined.map(Number);
-      let MaxPk = Math.max(...numberArray, 0) + 1;
-
-      let LocalInsertData = { ...LocalinDataToInsert, pk: MaxPk };
-      data.push(LocalInsertData);
-
-      fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
-
+    if (result.insertedId) {
       LocalReturnObject.KTF = true;
-      LocalReturnObject.SuccessText = `Inserted pk ${MaxPk} In To ${LocalFileName}.json successfully`;
-
-      return LocalReturnObject;
+      LocalReturnObject.SuccessText = `Inserted document with _id ${result.insertedId} into MongoDB successfully.`;
     } else {
-      LocalReturnObject.KReason = `File ${LocalFileName}.json does not exist in ${LocalDataPath} folder.`;
-      console.warn(LocalReturnObject.KReason);
-
-      return LocalReturnObject;
-    };
+      LocalReturnObject.KReason = "Insert failed.";
+    }
   } catch (err) {
+    LocalReturnObject.KReason = `Error inserting into MongoDB: ${err.message}`;
     console.error('Error:', err);
-  };
+  } finally {
+    await client.close();
+  }
 
-  return await LocalReturnObject;
+  return LocalReturnObject;
 };
 
 export { StartFunc };
